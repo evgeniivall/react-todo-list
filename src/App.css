@@ -1,0 +1,106 @@
+.App {
+  text-align: center;
+}
+
+/* App.css */
+
+/* Reset CSS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Container */
+.to-do-list {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+  height: 500px; /* Set the desired height */
+  overflow: hidden; /* Ensure the image doesn't overflow the container */
+}
+
+.image-container img {
+  width: 100%; /* Make the image fill the entire container */
+  height: 100%; /* Make the image fill the entire container */
+  object-fit: cover; /* Ensure the image covers the entire container without stretching */
+}
+
+/* Text Input */
+.text-input {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.text-input form {
+  display: flex;
+}
+
+.text-input input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.text-input button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  background-color: #686868;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.text-input button:hover {
+  background-color: #0058cb;
+}
+
+/* List Item */
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.list-item button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #f44336;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.list-item button:hover {
+  background-color: #d32f2f;
+}
+
+.item-text {
+  margin-left: 10px;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
