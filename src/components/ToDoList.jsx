@@ -29,7 +29,6 @@ function ToDoList() {
       try {
         const response = await fetch(process.env.REACT_APP_CATS_API_URL);
         const data = await response.json();
-        console.log(data);
 
         setCatImgURL(data[0].url);
       } catch (error) {
