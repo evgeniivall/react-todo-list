@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 
 import TextInput from "./TextInput";
 import ListItem from "./ListItem";
@@ -13,8 +13,39 @@ function ToDoList() {
   You can call useState multiple times to manage multiple state variables in a component.
   */
   const IMG_PLACEHODLER = "./placeholder.png";
-  const [items, setItems] = useState([]);
   const [catImgURL, setCatImgURL] = useState(IMG_PLACEHODLER);
+
+  const reducer = (items, action) => {
+    switch (action.type) {
+      case "add": {
+        const newItem = { id: uuidv4(), value: action.value, done: false };
+        return [...items, newItem];
+      }
+      case "delete": {
+        return items.filter((item) => item.id !== action.id);
+      }
+      case "toggle_done": {
+        const newItems = items.map((item) => {
+          if (item.id === action.id) {
+            return { ...item, done: !item.done };
+          }
+          return item;
+        });
+        return newItems;
+      }
+      default: {
+        return items;
+      }
+    }
+  };
+
+  /*
+  useReducer is a React hook used for managing complex state logic in functional components.
+  It is an alternative to the useState hook
+  and is particularly useful when the state logic involves multiple sub-values
+  or when the next state depends on the previous one.
+  */
+  const [items, dispatch] = useReducer(reducer, []);
 
   /*
   useEffect is a hook provided by React that allows you to perform side effects in function components.
@@ -40,38 +71,19 @@ function ToDoList() {
     // If not provided, the effect runs after every render.
   }, [items]);
 
-  const addItem = (value) => {
-    const newItem = { id: uuidv4(), value, done: false };
-    // DO NOT MUTATE STATE
-    setItems([...items, newItem]);
-  };
-
-  const deleteItem = (id) => {
-    setItems(items.filter((item) => item.id !== id));
-  };
-
-  const toggleItem = (id) => {
-    setItems(
-      items.map((item) => {
-        item.id === id && (item.done = !item.done);
-        return item;
-      })
-    );
-  };
-
   return (
     <div className="to-do-list">
       <div className="image-container">
         <img src={catImgURL} alt="" />
       </div>
-      <TextInput addItem={addItem} />
+      <TextInput addItem={(value) => dispatch({ type: "add", value })} />
       {items.map((item) => (
         // Arguments passed to component are called 'props'
         <ListItem
           item={item}
           key={item.id}
-          deleteItem={deleteItem}
-          toggleItem={toggleItem}
+          deleteItem={(id) => dispatch({ type: "delete", id })}
+          toggleItem={(id) => dispatch({ type: "toggle_done", id })}
         />
       ))}
     </div>
