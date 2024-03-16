@@ -9,7 +9,7 @@ function ListItem({ item, deleteItem, toggleItem }) {
           type="checkbox"
           name="done"
           value={done}
-          onClick={() => toggleItem(id)}
+          onChange={() => toggleItem(id)}
         />
         <span className={`${done && "strikethrough"} item-text`}>{value}</span>
       </div>
