@@ -71,6 +71,38 @@ body {
   background-color: #0058cb;
 }
 
+.stats-container {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.stat-item {
+  flex-grow: 1; /* Fill the entire horizontal space */
+  padding: 10px;
+  margin-right: 10px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove margin from the last item to prevent extra space */
+.stat-item:last-child {
+  margin-right: 0;
+}
+
+.label {
+  display: block;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: #686868;
+}
+
+.value {
+  font-size: 20px;
+}
+
 /* List Item */
 .list-item {
   display: flex;

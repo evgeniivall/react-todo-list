@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState, useReducer, useMemo } from "react";
 
 import TextInput from "./TextInput";
 import ListItem from "./ListItem";
@@ -71,12 +71,34 @@ function ToDoList() {
     // If not provided, the effect runs after every render.
   }, [items]);
 
+  /*
+  useMemo is a React hook used for memoization.
+  Memoization is an optimization technique that stores the results of expensive function calls
+  and reuses them when the same inputs occur again.
+  This can help improve performance by avoiding unnecessary recalculations.
+  */
+  const completedItems = useMemo(() => {
+    return items.reduce((acc, cur) => {
+      return acc + (cur.done ? 1 : 0);
+    }, 0);
+  }, [items]);
+
   return (
     <div className="to-do-list">
       <div className="image-container">
         <img src={catImgURL} alt="" />
       </div>
       <TextInput addItem={(value) => dispatch({ type: "add", value })} />
+      <div className="stats-container">
+        <div className="stat-item">
+          <span className="label">Total</span>
+          <span className="value">{items.length}</span>
+        </div>
+        <div className="stat-item">
+          <span className="label">Completed</span>
+          <span className="value">{completedItems}</span>
+        </div>
+      </div>
       {items.map((item) => (
         // Arguments passed to component are called 'props'
         <ListItem
