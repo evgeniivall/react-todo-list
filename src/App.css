@@ -136,3 +136,9 @@ body {
 .strikethrough {
   text-decoration: line-through;
 }
+
+@media only screen and (max-width: 480px) {
+  .image-container {
+    height: 250px;
+  }
+}
