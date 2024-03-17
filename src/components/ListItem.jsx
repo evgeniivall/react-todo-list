@@ -8,7 +8,7 @@ function ListItem({ item, deleteItem, toggleItem }) {
         <input
           type="checkbox"
           name="done"
-          value={done}
+          checked={done}
           onChange={() => toggleItem(id)}
         />
         <span className={`${done && "strikethrough"} item-text`}>{value}</span>
