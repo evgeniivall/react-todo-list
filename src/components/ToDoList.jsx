@@ -13,6 +13,7 @@ function ToDoList() {
   You can call useState multiple times to manage multiple state variables in a component.
   */
   const IMG_PLACEHODLER = "./placeholder.png";
+  const LOCAL_STORAGE_KEY = "to-do_items";
   const [catImgURL, setCatImgURL] = useState(IMG_PLACEHODLER);
 
   const reducer = (items, action) => {
@@ -45,7 +46,10 @@ function ToDoList() {
   and is particularly useful when the state logic involves multiple sub-values
   or when the next state depends on the previous one.
   */
-  const [items, dispatch] = useReducer(reducer, []);
+  const [items, dispatch] = useReducer(
+    reducer,
+    JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []
+  );
 
   /*
   useEffect is a hook provided by React that allows you to perform side effects in function components.
@@ -69,6 +73,10 @@ function ToDoList() {
     fetchCatImage();
     // Array of dependencies. If provided, the effect will only run if the dependencies have changed since the last render.
     // If not provided, the effect runs after every render.
+  }, [items]);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items));
   }, [items]);
 
   /*
